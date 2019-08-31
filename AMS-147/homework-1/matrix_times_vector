@@ -1,0 +1,28 @@
+%antoine Rocha
+%arocha4@ucscs.edu
+%matrix times vector
+%computes the product between an n- matrix and a vector 
+%input nxn matrix
+%output nx1 matrix 
+%use two nesteed for loops 1 to compute y
+%2 for controls the index v 
+% side note size(A) can determine the size
+
+
+function [y] = matrix times vector(A,x) % function supplied to us by homework
+  
+y(1) = 0;  
+v = 0; % set variable to zero
+%loop for the nuber of rows within the matrix
+for k = 1:size(A)
+%loop for columns, summing the product of the vectors
+  for r = 1:size(A)
+    v = v+(A(k,r)*x(r));
+  end
+  y(k) = v;
+  v = 0;
+end
+%Transpose y to make a 1 row vector
+y = y';
+
+end
