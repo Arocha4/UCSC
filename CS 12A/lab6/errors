@@ -1,0 +1,23 @@
+//Antoine Rocha
+//arocha4
+// lab6
+//These are the errors found in LetterHome
+
+1. when entering 5 2. There is suppose to be a period after "Thanks for the stuff you sent"
+
+
+2. Inputting 2 4 into weather gives out hot instead of cold.
+
+
+3. Inputting 3 3 it should be "I plan to come home for a visit "next weekend"
+   instead of "last weekend".
+
+
+4. In asking for money functions number 4 "I have to buy another books for my one of my classes,
+   the "books" should be "book".
+
+
+5. When entering a invalid number for number 5,
+   an "ERROR" message replaces the "____ you sent." instead of just "_____".
+
+6. When entering a number larger than 2,147,483,647 in function asking for money  you get an ERROR.
