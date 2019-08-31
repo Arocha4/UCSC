@@ -1,0 +1,51 @@
+ % Antoine Rocha
+% arocha4
+% tridiag_solver.m
+% function implements the Thomas algorithum to solve tridiagonal linear systems of equations
+% input of the function  
+%e=[], a=[], c=[], b=[]^T.
+
+% output 
+% x: solution 
+
+% to run the function you all inputs must have the same length
+% also
+
+
+function x = tridiag_solver( e, a, c, b )  % function given to complete 
+%e =[8 0 ];  % same inputs given to test backward_sub but split into e,a,c,b 
+%a =[1 4 ]; 
+%c =[1 0 ];
+%b =[6; 1];
+n=length(a);   % set n to length(a)
+% taken form wiki method for thomas algorithum
+% thomas Algorithm 
+% modifying the coefficents
+% then soltion obtained by back substiution 
+% 
+Al(1)=a(1);  % set alfa value 
+BE(1)=0;      % set beta value
+for i=2:n    % loop to set new values 
+    BE(i)=e(i-1)/Al(i-1); % set bet value 
+    Al(i)=a(i)-BE(i)*c(i-1);  % set alfa value
+end
+arr=ones(n,1); % initalize v array of ones 
+arr(1)=b(1);   % set the values of v to 
+for i=2:n  % loop to set array to normalize 
+    arr(i)=b(i)-BE(i)*arr(i-1);  % loop to set arr
+end
+x=ones(n,1);  % initalize arrray for answer 
+x(n)=arr(n)/Al(n); % normalize 
+for i= 1:(n-1) % loop for i to n-1 
+    j=n-i;
+    x(j)=(1/Al(j))*(arr(j)-c(j)*x(j+1)); % display answer through back sub
+end
+end
+% This was an interesting function to complete due to time constriants didnt comment throughly 
+% at first I solved this using the built in Diag function but that wasn't allowed 
+% becuase we were instructed to use thomas algorithum which seemed like a cheat to me 
+% why not use the built in fucntion but I understand why it builds the fundamentals of 
+% that this class is trying to teach. I was dumbfounded at the easy way out 
+% but I found another youtube video for the win thank god for indian guys on youtube
+% the conversion of the matrix to double check the output was also time consuming. 
+% had to convert the matrix U using the diagram provided in the homework pdf 
