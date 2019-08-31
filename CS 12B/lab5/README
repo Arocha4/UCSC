@@ -1,0 +1,13 @@
+// Antoine Rocha
+// arocha4
+// cmps12M
+// lab5 README
+// contains the files being submitted 
+
+
+README
+Makefile
+Dictionary.c
+DictionaryTest.c
+Dictionary.h
+DictionaryClient.c
