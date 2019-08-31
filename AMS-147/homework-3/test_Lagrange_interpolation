@@ -1,0 +1,72 @@
+% Antoine Rocha
+% arocha4
+% test lagrange inerpolation returns vect of 1,000 evenly spaced lines
+% vectur at x
+% lagranidan interpolant on grid 2 N=14
+% ''                              '' N=40
+%''                        ''grid 3  N=14
+%''                        ''grid 3  N=40
+function [x,f,P1,P2,P3,P4] = test_Lagrange_interpolation ()
+f = @(x) 1./(1+sin((2.*pi.*x).^2)); % non-linear function given
+n =14;   %case 
+
+x =linspace(-1,1,14); %generate linearyl spaced vector is (-1,1)/(n-1) n=14
+
+for j=1:n %for 1 to case 14
+   xieven(j)=-1+((2*j)/n);   % even space grid
+  yieven(j)=1/(1+(20*xieven(j)^2));   % even case in non linear function 
+  xiodd(j)=cos(pi*j/n);                % uneven chebyshev
+  yiodd(j)=1/(1+(20*xiodd(j)^2));       % chebyshev in the non linear function
+
+  end
+   figure(1); 
+    clf   
+    hold on 
+    grid on
+   [p1] = Lagrange_interpolation(xieven,yieven,x);% set y
+   plot(x,p1,'r')
+   plot(x,yieven,'b')
+   plot(xieven, yieven, 'ro') % plot interpolation in red and evenly spaced gridesn=14
+ 
+
+ 
+ figure(2);
+ clf
+ hold on
+ grid on 
+  [p2] = Lagrange_interpolation(xiodd,yiodd,x); % set y 
+  plot(x,p2,'r',x,yiodd,'b',xiodd, yiodd, 'ro') % plot the fucntion with multiple lines
+  
+  
+  
+  n=40;
+  
+  for j=1:n % for 1 to case of 40
+  xjeven(j)=-1+(2*j/n);  %evenly spaced grid
+  yjeven(j)=1/(1+(20*xjeven(j)^2)); %even in the non linear function 
+  xjodd(j)=cos(pi*j/n);           % uneven space grid 
+  yjodd(j)=1/(1+(20*xjodd(j)^2));    % unevenin the non linearfunction 
+end
+
+
+
+x =linspace(-1,1,40); % generate linear spaced vector from -1,1 n =40
+figure(3); 
+clf
+hold on 
+grid on                                
+[p3] = Lagrange_interpolation(xjeven,yjeven,x); %set y
+plot(x,p3,'r',x,yjeven,'b',xjeven, yjeven, 'ro')  % plot multiple lines red, blue
+
+
+
+figure(4);
+clf 
+hold on 
+grid on 
+[p4] = Lagrange_interpolation(xjodd,yjodd,x); % set y 
+plot(x,p4,'r',x,yjodd,'b',xjodd, yjodd, 'ro') % plot graph red blue
+end
+  % figures dont look correctI think its due to the linspace not being 1000 but
+   % I get an error of mathing vectors and I dont have time debug 
+   % the existing problem 
