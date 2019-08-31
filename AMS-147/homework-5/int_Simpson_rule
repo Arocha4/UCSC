@@ -1,0 +1,29 @@
+% Antoine Rocha
+% arocha4
+% int_Simpson_rule
+% computs the numerical approximation of fucniton
+% Simpsons rule is a method of numerical integrals. it follows the appox
+% for n equally spaced subdivivions 
+
+% input fun: function handle representing f(x)
+%       a,b: the endpoints of the integration interval
+%       n: number of evenly spaved points in the invterval  aka the # of subintervals
+
+% output  I: numerical approximation of the integral
+function I = int_Simpson_rule(fun,a,b,n) %  function provided composite Simpson rule
+ h=(b-a)/(2*n); % calculate h based on subinterval h is midpoint
+ sum1=0; % set sum1 to 0
+ sum2=0; % set second summation sum2 to 0
+ for i=1:n  % loop for summation thats apart of simpsons rule
+   x=a+h*(2*i-1); % f(x_2 -1) +f(b)
+   sum1=sum1+fun(x);
+ end
+ for i=1:(n-1) % loop for other summation appart of simpsons rule
+   x=a+h*2*i;  % 
+   sum2=sum2+fun(x);
+ end
+ I=h*(fun(a)+fun(b)+4*sum1+2*sum2)/3;% display Simpson's formula excluding the error term
+                                     % h/3[2sum1(f_x2j)+4sum2(f(x_2 -1) +f(b))] -(b-a)/180 hf4(mu) 
+end
+% Was hard to figure the code out but youtube helped a ton had a simpsons rule tutorial
+%  
