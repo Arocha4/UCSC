@@ -1,0 +1,27 @@
+% antoine Rocha
+% arocha4
+% compute_Lebesgue_function
+% returns lebesgue constant 
+
+function [lambda,L]= compute_Lebesgue_function(xi,x)
+
+n = length(xi);
+Poly = ones(n,length(x));
+%-------------------------------------------------------------%
+
+%-------------------------------------------------------------%
+for k=1:n
+    for j=1:n
+        if j~=k
+            Poly(k,:)=Poly(k,:).*(x-xi(j))/(xi(k)-xi(j));
+        end
+    end
+end
+%-------------------------------------------------------------%
+
+%-------------------------------------------------------------%
+% Plot of Lebesgue Function:
+Poly = abs(Poly);
+l = sum(Poly,1);
+L= max(l)
+end
