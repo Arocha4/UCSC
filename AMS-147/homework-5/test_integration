@@ -1,0 +1,60 @@
+% Antoine Rocha
+% arocha4 
+% test_integration.m
+% returns 
+% en, et, and es: row vectors with components the absolute value of intergation erros 
+% |I_ref - I_n|   n=2,3,...,100
+% the function also retures the plotof te integrand function apppearing in figure(1) 
+% plots the erros en,et, and es versus n in a log-log scale in figure (2) 
+% one figure with three plots
+
+function [em,et,es] = test_integration()
+  
+funct = @(x) (cos((3.*(e.^(-x.^2)))./2))./(1+(x.^2)) - ((x.^3)./30); % function provided check the assigment  
+space = linspace(-3,1,1000);   % generate lineraly spaced vector from -3 to 1 with 1k points 
+
+% plot of integrand function 
+figure(1);  % create figure window 
+title ("integrand function"); % title of the plot doesnt show in ovtave for some reason
+plot(space,funct(space),'b') % plot integrand function in blue
+
+I = 1.6851344770476; % reffernce I_ref provided within the assingmetn 
+n = 100; % changed but evaluated to 100    n=2,3,.. 100 see announcements 
+y = -3;  % evealuate the fun below from y->z or -3 to 1 
+z = 1;   % "  "
+int_mid=zeros(99,1); % create array of zeros 99x1 will store values 
+int_trap=zeros(99,1); % "    "
+int_simp=zeros(99,1);  % "    " 
+
+% loop to store num approx from written funtions to return row vectors
+for i=2:n % from n 2 100
+  int_mid(i-1)=int_midpoint_rule(funct,y,z,i);  % call mid rule with inputs and store values
+  int_trap(i-1)=int_trapezoidal_rule(funct,y,z,i); % call tap rule "                      "
+  int_simp(i-1)=int_Simpson_rule(funct,y,z,i);   % call simp rule "                   "
+end
+
+% row vectors with absolute values of integration error given |Iref-In| n=2,3,..100
+em=abs(int_mid-I); % midpoint error absolute value of integration error 
+et=abs(int_trap-I); % trap error    "                                   "
+es=abs(int_simp-I);  % simp error    "                                  "
+
+
+% plot of errors en,et, and es in log log scale 
+figure(2) % create window
+title (" errors en,et,es v.s n in log scale"); % title of the plot
+loglog(2:1:100,em,'r')  % log scale plot for int midpoint integration errors in red 
+hold on                      % hold current graph
+loglog(2:1:100,et,'b')  % log scale plot for int trap integration erros in blue
+hold on                      % hold current graph
+loglog(2:1:100,es,'y')  % log scale plot for int simpson integration erros in yellow
+end
+disp(em);
+disp(et);
+dis(es);
+% this was fairly difficult but similar to the last homework assingmet
+% concept wise of graphing previously written function 
+% I can't tell if the title works in octave please comment if it works in matlab thank you for your time
+
+
+
+ 
