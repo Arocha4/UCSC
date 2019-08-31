@@ -1,0 +1,13 @@
+// Antoine Rocha
+//arocha4
+// README
+//cmps12b
+//this file contains the files to be submited 
+README
+Dictionary.java 
+DictionaryTest.java
+DuplicateKeyException.java 
+KeyNotFoundException.java
+DictionaryInterface.java 
+DictionaryClient.java 
+Makefile
