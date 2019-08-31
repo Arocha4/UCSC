@@ -1,0 +1,22 @@
+%antoine Rocha
+%arocha4@ucsc.edu
+%pi_series.m
+%computes the first 15 partial sums of the series
+%output p: row vector with components
+%n = 0
+%p = 0
+%wont attempt the extra credit
+
+
+function [P] = pm() % left out standard 
+  P = zeros(1,15); % storing into an array named P 1-15
+  P(1) = 18/5; % first value computed manually of P1 
+  for n = 2:15 % loopfrom 2 incremented to 15 for the fucniton below
+     P(n) = P(n-1)+3*((-1).^(n-1))*(1./(6*(n-1)+1)+1./(6*(n-1)+5)); % fomula for series check homework for summation reminder
+   end % end loop
+
+    
+disp(P) % display stored array as row vector
+
+end
+
