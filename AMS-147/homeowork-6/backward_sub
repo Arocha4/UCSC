@@ -1,0 +1,45 @@
+% Antoine Rocha
+% arocha4@ucsc.edu
+% backward_sub.m
+% fuction that returns the numerical solution to the upper trianglular system of equaitons
+
+% inputs:
+% U: upper triangular matrix_times_vector
+% b: column vector rep the right side of (1)
+
+% output:
+% x: solution to the linear system 
+% examaple inputs
+  % U =[1 1 ; 8 4; ];
+   %b= [6; 1;   ];
+  % works for any sqare matrix
+  
+function [x] = backward_sub(U,b) % function given to complete 
+   
+   %U =[1 1 ; 8 4; ];      % matrix used to test backward_sub function
+   
+   %b= [6; 1;   ];
+% Gauss elimination 
+[n,~] =length(b);  % find length of b to rep  number of varibales  %~ arguament placeholder
+x = zeros(n,1);  % initalize z array of all zeros
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%convert the matrix u to upper triangular form
+for i=1:n-1        
+  Multi = U(i+1:n,i)/U(i,i);    % mulipliers, m=U(2,1)/U(1,1)
+  U(i+1:n,:) = U(i+1:n,:) - Multi*U(i,:); 
+  b(i+1:n,:) = b(i+1:n,:) - Multi*b(i,:);
+ end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %Back substitution 
+ x(n,:) = b(n,:)/U(n,n); % find the value of the last varible 
+for i = n-1:-1:1    % loop for back sub
+    x(i) = (b(i,:)-U(i,i+1:n)*x(i+1:n,:))/U(i,i);  % find the values of the remaining varibles 
+    %x(i) =z(i); % display x the output, origally lost the output
+  end
+% this was a hard coding assingment to solve due to only have 4 days to complete
+% but once again youtune tutorials on Gauss Elimiantion saved me.
+% it works I tested it using x= inv(U)*b and got the same answer but got zeros for the last line 
+% fixed it it was due to transfering the last line before end it lost the last value
+% indian guys on youtube have your back.
+
