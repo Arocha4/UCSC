@@ -1,0 +1,21 @@
+% Antoine rocha
+% arocha4
+% int_trapezoidal_rule 
+% computes the numberical approximation of I(f).
+% for n equally spaced subdivivions 
+
+% input fun: function handle representing f(x)
+%       a,b: the endpoints of the integration interval
+%       n: number of evenly spaved points in the invterval  aka the # of subintervals
+
+% output  I: numerical approximation of the integral
+% comments above copied and pasted for other composite numerical approximation funtions 
+function [I]=int_trapezoidal_rule(fun,a,b,n) % funtion given to complete 
+h = (b-a)/n; % set h to midpoint 
+sum = 0.5*(fun(a) +fun(b)); % fuction fiven from class notes,   
+                        % summation form n to m  [f(k_n1) + f(x_n) ] * .5
+for i = 1 :n-1 % loop 
+  sum = sum + fun(a+i*h);
+end
+I = h*sum;
+% this wasnt that hard to complete the function wasnt as complex as others.
