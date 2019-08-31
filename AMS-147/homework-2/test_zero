@@ -1,0 +1,66 @@
+%Antoine Rocha
+%arocha4
+%test_zero
+%computes approximation of smallest zeros 
+% tried my best couldnt really figure it out all the way 
+
+%input
+% fun - funciton representing f(x)
+% a, b - interval 
+% tol - max tolerance 
+% Nmax - max# of iterations
+
+%output
+% z0 - approx of zero
+% iter - number of iterations
+% res - residual at z0
+% his - vector with all elements (convergenence hist)
+
+% also 3 figures
+% fig 1 - graph of function 
+% fig 2 - plot convergence hist
+% fig 3 - plot of e_k+1 = |x^(k+1 -0| v.s e_k = |e^k = z0|
+
+
+function [zc,ec,x,f] = test_zero () %fun given from homework
+
+%zc =  zero from chord methods
+%ec =  error vector
+
+
+a = -0.99; % first guess
+b = -0.9;  % second guess
+x0 = -.99;  % acutal 
+Nmax = 2000; % max iterations 
+tol = 10^(-15); %res toleracnce
+z0 = cos(9/10*pi); % given
+x = linspace(-1, 1, 1000); % generate linearly spaced vector
+fun = @(x) 16*(x).^5-20*(x).^3+5*(x); % set fun to 
+dfun = @(x) 80*(x).^4-60*(x).^2+5; % set funt
+
+
+
+[zc,iter,res,his]= chord_method(fun,a,b,tol,Nmax); %call method and set output 
+es = abs(his(1)-z0); % set error to absolute 
+
+
+%figure 1 plot 
+figure(1)
+y = 16*x.^5-20*x.^3+5*x; % set y 
+figure(1)
+clf % clear current figure window
+plot(x,y) % plot graph
+title ('f(x)'); %title of the graph
+
+%figure 2 plot
+figure(2)
+semilogy(abs(his-z0),'r') % semilogarithmic plot
+hold % retian hold when adding plots
+title('Semilog plot'); % title of the graph
+
+%fgure 3 plot
+figure(3)
+loglog(abs((his+1)-z0),'r'); % log scale plot
+hold % retain hold when adding plots 
+
+end
