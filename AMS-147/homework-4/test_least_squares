@@ -1,0 +1,56 @@
+% antoine Rocha
+% arocha4
+% test_least_squares
+% fucntion outputs figure with plots of DJI opening prices and outputs vector of 1000 evenly spaced evaluations
+% use fucniton in Excercise 1 to determine the least squares polynomial appox of the data set
+
+
+function [x,p1,p2,p4,p8] = test_least_squares()   % built in funtion given
+  
+DJIdata = load('DJI_2014_2019.dat'); % load varibes from given file into work space 
+
+space = linspace(0,1,1000);  % set space to lineratly spaced vector 
+xi = DJIdata(:,1);   % set xi to first column of the matrix DJIdata
+yi = DJIdata(:,2);   % set yi to second column of the matrix DJIdata
+
+[aar1,err1] = poly_least_squares(xi,yi,1);   % contruct arrary to capture the argument from poly_least(xi,yo]i,1)
+
+[aar2,err2] = poly_least_squares(xi,yi,2);   % construct array and capture the output of poly_least(xi,yi,2)
+
+[aar4,err4] = poly_least_squares(xi,yi,4);   % construct array and capture the output of poly_least(xi,yi,4)
+
+[aar8,err8] = poly_least_squares(xi,yi,8);   % construct array and capture the output of poly_least(xi,yi,8)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+flip(aar1)  % flio order of elements left to right
+
+p1=polyval(flip(aar1),space); % set P1 to built in polynomial evaluation of written fuction to get P1
+
+p2=polyval(flip(aar2),space); % set P2 ''                                  '' P2
+
+p4=polyval(flip(aar4),space);% set P3  ''                                  '' P4
+
+p8=polyval(flip(aar8),space); % set P4  ''                                 '' P8
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% DJI opening prices plotting 
+figure(1)   % create figure window 
+plot(xi,yi,'b'); % plot DJI openeing prices in blue 
+hold on    % retain current plot when adding new plots
+
+plot(space,p1, 'r'); % Plot least_squaresmodels p1 in red
+hold on   % retain plot 
+
+plot(space,p2, 'r');   % plot LSM P2 in red
+hold on   % retain plot 
+plot(space,p4,'r');   %plot LSM in red
+
+hold on % retain plot 
+plot(space,p8,'r');   % plot LSM in red
+
+grid on   % display grid lines
+end
+
+% I dont know for certain if the plots are correct, due to not knowing if my previous function is written correctly.
+% due to time contraint of other course work will have to submit early  
