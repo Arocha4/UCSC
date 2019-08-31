@@ -1,0 +1,25 @@
+% Antoine Rocha
+% arocha4
+% Lagrange interpolation.m
+% fucntion computs lagrangian interpolant of given data points
+
+% input 
+% xi: vector of interpolation nodes
+% yi: vector of data points at the interpolation nodes
+% x: vector of points at which we want to evaluate the Lagrange polynomial interpolant
+function [y] = Lagrange_interpolation (xi, yi, x)
+  y =0; % set y 2 0
+  n = length(xi); % length of vector 
+  vect = ones(n,length(x)).*dataPoint; % array of all ones
+  for r=1:n   %loop for 1 up to length of vector xi
+    for i=1:n   % another loop up to the length of xi
+      if i~=r    % execute code below if i logicalial isnt r.
+        vect(r,:)= vect(r,:).*(x-xi(i))/(xi(r)-xi(i));  % forumala 
+       end 
+    end
+     y = y + yi(r)*vect(r,:);   % loop to find the lagrange polynomicals interpolants evaluated at x 
+    %whos y; % list varibles in workspace with size and types
+   end
+   
+   % i keep getting weird answers tried to compare with the octave build in function
+   % and they gave double ansers but I got the same answers.
