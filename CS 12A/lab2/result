@@ -1,0 +1,21 @@
+/afs/cats.ucsc.edu/users/y/arocha4/cmps12a/lab2
+
+Access list for public is
+Normal rights:
+  system:operator rlidwk
+  system:authuser rlid
+  system:anyuser rl
+  arocha4 rlidwka
+
+Access list for private is
+Normal rights:
+  arocha4 rlidwka
+
+total 7
+-rw-r--r--. 1 arocha4 users  425 Jan 18 20:34 HelloWorld.class
+drwxr-xr-x. 2 arocha4 users 2048 Jan 18 17:36 private
+-rwx------. 1 arocha4 users  194 Jan 23 09:36 prog
+drwxr-xr-x. 2 arocha4 users 2048 Jan 18 17:35 public
+-rw-r--r--. 1 arocha4 users  238 Jan 23 09:38 result
+
+Hello, lab2
