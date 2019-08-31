@@ -1,0 +1,37 @@
+% Antoine Rocha
+% arocha4
+% Poly_least_squares.m
+% fucniton implements least square method to approx. data set in terms of 
+% Degree M. 
+% input
+% xi: vector of nodes
+% yi: vector of data points
+% M degree of polynomial 
+% return a: vector of nodes, and err: error 
+
+function [a,err] = poly_least_squares(xi,yi,M)   % function given to complete 
+  N = length(xi);  % set n to length of vector of nodes xi
+  matx = ones(N,M+1); % create matrix of ones
+  
+  for k=2:M+1  
+    matx(:,k)=xi.^(k-1); %A indexed from n to M+1 = Xi(n)^(degree)
+  end
+  
+ [L, C] = qr(matx, 0);  % QR factorization % returns upper triagular matrix R and matrix L
+ a = (C\(L'*yi(:)))'; % set a to vector of coefficients
+ E = 0;  % set E =0
+ error = 0;   % set error to 0
+  for k = 1:N      % loop to find error check notes 
+    for l = 1:M+1    
+     E = E + (a(l) * xi(k)^(l-1));  %
+    end
+    err = error + (yi(k)-E)^2;  % Error function from class notes
+    err % display each error itterativly  
+    end
+   
+end
+% I tried implementing the inbuilt polyval() & polyfit() function to compare 
+% the polynomial evaluation and I got different values I cant seem to figure out 
+% why that this is the case, must be due to wrong fucntions
+% will continue to excersise 2 and try a hardcoded version to compare plots. 
+ 
