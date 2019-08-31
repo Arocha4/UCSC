@@ -1,0 +1,16 @@
+// Antoine Rocha
+// Arocha4
+// Cmps12b
+// Lab7
+// README
+// Contains the files being submited
+
+README 
+Makefile
+Dictionary.java
+
+DictionaryInterface.java
+DuplicateKeyException.java
+KeyNotFoundException.java
+DictionaryClient.java
+
