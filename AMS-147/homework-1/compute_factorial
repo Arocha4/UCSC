@@ -1,0 +1,13 @@
+%antoine rocha
+%arocha4@ucsc.edu
+% facrorial 
+% while loop to compute the factorial of any natrual number bigger than 0
+function retval = compute_factorial (input1, input2)
+n = input1;
+fact = n;
+while n>1
+  n = n-1;
+  fact = fact*n;
+ end
+ disp([num2str(fact)])
+endfunction
