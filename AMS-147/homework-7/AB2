@@ -1,0 +1,52 @@
+% Antoine Rocha
+% arocha4
+% Ab2.m 
+% function that computes the numberial solution using two step adams Bashford scheme
+% and using the Heun method.
+
+% input
+% fun : function handle representing f(y,t)
+% yo: inital conidition 
+% NSTEPS: total number of steps
+% DT: time step
+% IOSTEP: input/output step. the numerical solution is saved in teh output matrix y every ioSTEP
+
+
+% output
+% y : the nxS matrix collection the time snapshots of the solution
+% t : vector collecting the time instals at which the solution is saved in the output mateix y 
+
+
+
+% this function computes the numerical solution to the system of ordinary differnetial equaitons  
+
+function [y,t] = AB2(fun,y0,NSTEPS,DT,IOSTEP)% function given to complete 
+% Startup with Heun method as advised 
+    ts = 0;  % inintializet timestep
+    y=y0;    % inintialize the collum vector 
+    t=0; % inintialize t which will be in the vector output 
+    
+    %y1 = y0+0.5*DT*(fun(y0+DT*fun(y0,ts),ts+DT)+fun(y0,ts)); % initialize y1. function from section slides 
+    %y2 = y1+0.5*DT*(fun(y1+DT*fun(y1,ts),ts+DT)+fun(y1,ts)); % initalize y2 function was given though notes
+
+for k=1:NSTEPS  
+ts = (k-1)*DT;
+y1 = y0+0.5*DT*(fun(y0+DT*fun(y0,ts),ts+DT)+fun(y0,ts)); % initialize y1. function from section slides 
+y2 = y1+0.5*DT*(fun(y1+DT*fun(y1,ts),ts+DT)+fun(y1,ts)); % initalize y2 function was given though notes
+y3 = y2+0.5*DT*(fun(y2+DT*fun(y2,ts),ts+DT)+fun(y2,ts));
+if mod(k,IOSTEP)==0  % check the time step to store the solution (of iostop factos into ii )
+y =[y y3];       % store soluiton apprnd to current soluiton 
+t = [ t ts+DT];  % store the time 
+end  
+y0 = y1; % reset to solution that wil be used for plotting in solve_ODE_system fucntion 
+y1 = y2;
+y2 = y3;
+end 
+end
+% This was a hard assignment to understand but section helped in the sense that I had to plot y1,y2, and y3
+% I am not sure if this was done correctly but I ended up getting graphs that are very simular 
+% To the TA so I assume AB2 2 was done correctly. I came to the coclusion that I had to solve for y1,y2,y3 based on 
+% section for and up to Nsteps based on slides online. 
+% due to time constriants I cant test Ab2 throughly enough 
+% thank you for everything throught the quarter. 
+
