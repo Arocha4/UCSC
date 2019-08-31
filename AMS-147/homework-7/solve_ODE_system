@@ -1,0 +1,47 @@
+% Antoine Rocha
+% arocha4
+% using the previous function written compute the numberical soluiton to this end
+% NSTEPS=1e5 ~100,000
+% DT= 1e-3  ~ .001
+% IOSTEP=50
+% y0=[1; 2; 3]
+
+% input: 
+% this function shouldnt need any inputs besides the utilizing the prvious fuction 
+
+% output: 
+% funciton should display 2 figures
+
+% first figure should be the graphs of y1(t), y2(t), and y3(t) vesus time in figure 1
+
+% second figure should display the three dimentional plot 
+
+function [y,t] = solve_ODE_system()  % fucntion given to complete 
+f = @(y,t) [-y(1)+y(2)*y(3);-y(2)+(y(3)-2)*y(1);1-y(1)*y(2)];  % given three dimensional nonlinear dynamic system 
+    NSTEPS = 100000;  % these are the given inputs
+    IOSTEP = 50; % given input
+    DT = .001;  % given input 
+    y0 = [1;2;3];  % given input
+[y,t] = AB2(f, y0, NSTEPS, DT, IOSTEP);% recall to previouus function written to display the asked plots
+disp(floor(NSTEPS/IOSTEP)+1);  % display time snapshots of the soltion 
+    S = floor(NSTEPS/IOSTEP)+1;  % set S this was given in the problem check excerise 2 
+    y1t = ones(S, 1);  % array of 1's to store size Sx1
+    y2t = ones(S, 1); % array of 1's '               '
+    y3t = ones(S, 1); % array of 1's '               '
+    for i = 1:S ; % loop to store data and plot up to snapshots~2001, given in problem
+        y1t(i) = y(1,i); % store values of y1(t) to plot 
+        y2t(i) = y(2,i); % y(t)''
+        y3t(i) = y(3,i);% y3(t)''
+    end
+    % figure1 graphs of y1(t), y2(t), and y3(t) vesus time
+    figure(1); % Create figure window 1
+    plot(t, y1t,'g', t, y2t,'b', t, y3t,'k');  % plot time against solutions 
+    
+    % display the three dimentional plot
+    figure(2); % create figure window 2
+    plot3(y1t,y2t,y3t);  % plot3 ~ 3-D line plot 
+end
+% this was a hard assignment to complete I am unsure of the plots becuase I have not compared 
+% the plot with any known correct answer just amoung classmates but most have differnt graphs thus
+% I am unsure ofthe correctness of AB2. I can only assume I correctly wrote AB2. 
+% 
