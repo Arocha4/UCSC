@@ -1,0 +1,113 @@
+#####################################################
+Priscilla Usmani (pusmani@ucsc.edu)
+Partner: Andrew Fisher (anmfishe@ucsc.edu)
+Lab3: Monday/Wednesday 6:00-8:00
+#####################################################
+#include <WProgram.h>
+.global myprog	
+.text	
+.set noreorder
+.ent myprog 
+myprog:
+	jal	initTmp		
+    nop
+	jal	make_stack
+	nop
+	/* Print original message */
+init:	la      $a0,Serial 			
+	la 	$a1,msg
+	la	$s2,stack
+	la	$s3,tmp
+	and	$t6, $t6, $0		
+	jal     _ZN5Print7printlnEPKc
+	nop 	
+    la $s1, msg
+    
+store_loop: 
+	lb	$t1, 0($s1)
+	li	$t2, 0x20
+	beq	$t1, $0, reverser
+	nop
+	beq	$t1, $t2, reverser
+	nop
+	sb	$t1, 0($s2)
+	addi	$s2, $s2, 1
+	addi	$s1, $s1, 1
+	addi	$t6, $t6, 1
+	j       store_loop
+    nop
+reverser:
+	reverser_loop:
+		bltz	$t6, reverser_end
+		nop
+		addi	$t6, $t6, -1
+		lb	$t3, 0($s2)
+		sb	$t3, 0($s3)
+
+		addi	$s2, $s2, -1
+		addi	$s3, $s3, 1
+		j	reverser_loop
+		nop
+	reverser_end:
+		la $a0, Serial
+		la	$a1, tmp
+		addi $a1, $a1, 1
+		jal     _ZN5Print7printlnEPKc
+		nop
+		beq	$t1, $0, done
+		nop
+		j 	was_space
+		nop
+	was_space:
+		addi	$s1, $s1, 1
+		la	$s2, stack
+		la	$s3, tmp	
+		and $t6, $t6, $0
+		j	store_loop
+		nop
+	done:
+	
+		j done
+		nop	
+make_stack:
+	addi	$t7, $0, 10
+	la		$t9, stack
+	lb		$t8, zChar
+stack_loop:
+	sb		$t8, 0($t9)
+	addi	$t9, $t9, 1
+	addi	$t7, $t7, -1
+	beq		$t7, $0, in_fin
+	nop
+	j		stack_loop
+	nop
+in_fin:
+	jr		$ra
+	nop		
+initTmp:
+	addi	$t7, $0, 10
+	la		$t9, tmp
+	lb		$t8, zChar
+	
+inloop:
+	sb		$t8, 0($t9)
+	addi	$t9, $t9, 1
+	addi	$t7, $t7, -1
+	beq		$t7, $0, indone
+	nop
+	j		inloop
+	nop
+indone:
+	jr		$ra
+	nop
+
+.end myprog 
+
+.data
+zChar:	.byte	0					
+msg:	.ascii	"hello world\0"		
+tmp:	.space 	10					
+stack: .space	10
+
+nullStr: .ascii "\0"
+
