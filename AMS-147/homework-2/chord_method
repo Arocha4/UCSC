@@ -1,0 +1,57 @@
+%Antoine Rocha
+%arocha4@ucsc.edu
+%chord_method.m
+%implements the chord method to find the zeros of a non linear equation.
+
+%input of the function 
+%fun - funciton 
+%[a,b] - interval where a zero lies
+%tol -max tolerance for increment |x(k=1)-x(k)|
+%nmax - num of iterations
+
+%output of the fucntion 
+%returns
+%z0 - approx of zero
+%iter - number of iterations to get approx of zero
+%res - residual(difference between predicted and actual) at Z0
+%his - vector with all elements of the convergence histoy  
+
+%Chord method
+
+function [z0,iter,res,his] = chord_method(fun,a,b,tol,Nmax) % fun given
+G=(fun(b)-fun(a))/(b-a); % bisectoin 
+
+x=[a (a+b)/2 b]; % midpoint betwen the two
+
+iter=1;  % iteration set to 1
+
+x0= (a+b)/2; % x0 set to midpoint 
+
+while iter <= Nmax 
+  iter = iter+1; %increment iteration by 1
+  
+  if fun(x(1))*fun(x(2)) < 0 
+    x(3) = x(2); %set x(3) to x(2)
+    x(2)=x(2)-(fun(x(2))/G); % x(2) set to x(2) - fun()*midpoint
+    his(iter)=x(2);  % vect(iteration) set to x(2)
+  
+  elseif fun(x(2))*fun(x(3)) < 0 % 
+    x(1) = x(2); % set x1 to x2
+    x(2) = x(2)-(fun(x(2))/G);
+    his(iter)=x(2); %vector iter set to x2
+ 
+ elseif fun(x(2)) == 0 % if fun is 0
+    z0 = x(2); % approx is 
+    his(iter)=x(2); %vect set to x(2)
+    res = 0; % residual set to 0
+   
+   return;
+  
+  end
+  
+end
+
+z0=x(2); % zero approx set @ x(2)
+
+res=abs(fun(x0)); %residual is absolute value of fun @ midpoint
+end
